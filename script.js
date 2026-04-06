@@ -581,14 +581,22 @@ window.addEventListener('eic-city-click', e => {
   const imgWrap   = document.getElementById('cityPanelImgWrap');
   const imgEl     = document.getElementById('cityPanelImg');
   const captionEl = document.getElementById('cityPanelImgCaption');
-  if (city.img) {
-    imgEl.src = city.img;
-    imgEl.alt = city.imgCaption || city.name;
-    captionEl.textContent = city.imgCaption || '';
-    imgWrap.style.display = 'block';
-    imgEl.onerror = () => { imgWrap.style.display = 'none'; };
-  } else {
-    imgWrap.style.display = 'none';
+  imgWrap.style.display = 'none';
+  imgEl.src = '';
+  if (city.wikiTitle) {
+    const apiUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(city.wikiTitle)}&prop=pageimages&pithumbsize=640&format=json&origin=*`;
+    fetch(apiUrl)
+      .then(r => r.json())
+      .then(data => {
+        const page = Object.values(data.query.pages)[0];
+        if (page.thumbnail) {
+          imgEl.src = page.thumbnail.source;
+          imgEl.alt = city.name;
+          captionEl.textContent = city.imgCaption || '';
+          imgWrap.style.display = 'block';
+        }
+      })
+      .catch(() => { imgWrap.style.display = 'none'; });
   }
 
   cityPanel.classList.add('open');
