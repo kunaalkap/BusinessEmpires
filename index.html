@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EIC Committee of Lawsuit — Research Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=7" />
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js" data-three defer></script>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════════════
+       SITE HEADER
+  ═══════════════════════════════════════════════════════ -->
+  <header class="site-header" id="siteHeader">
+    <div class="header-top">
+      <div class="header-inner">
+
+        <a class="header-brand" href="#">
+          <span class="brand-crest">§</span>      
+          <div class="brand-text">
+            <span class="brand-title">EIC Lawsuit Records</span>
+            <span class="brand-sub">Committee Research Project</span>
+          </div>
+        </a>
+
+        <!-- Search bar -->
+        <div class="search-wrap">
+          <div class="header-search">
+            <span class="search-icon">&#9906;</span>
+            <input type="text" placeholder="Search records, themes, actors…" class="search-input" id="searchInput" autocomplete="off" />
+          </div>
+          <div class="search-results" id="searchResults"></div>
+        </div>
+
+        <nav class="header-nav" role="tablist">
+          <button class="tab-btn active" data-tab="home">Home</button>
+          <button class="tab-btn" data-tab="description">Project</button>
+          <button class="tab-btn" data-tab="questions">Research Questions</button>
+          <button class="tab-btn" data-tab="visualizations">Visualizations</button>
+        </nav>
+
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode" title="Toggle theme">
+          <span class="icon-moon">&#9790;</span>
+          <span class="icon-sun">&#9788;</span>
+        </button>
+
+        <button class="hamburger" id="hamburger" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile nav -->
+    <div class="mobile-nav" id="mobileNav">
+      <button class="tab-btn active" data-tab="home">Home</button>
+      <button class="tab-btn" data-tab="description">Project</button>
+      <button class="tab-btn" data-tab="questions">Research Questions</button>
+      <button class="tab-btn" data-tab="visualizations">Visualizations</button>
+    </div>
+  </header>
+
+  <!-- ══════════════════════════════════════════════════════
+       MAIN
+  ═══════════════════════════════════════════════════════ -->
+  <main class="main-content">
+
+    <!-- ════════════════════════════════════════════════════
+         HOME TAB
+    ═══════════════════════════════════════════════════════ -->
+    <section class="tab-panel active" id="tab-home">
+
+      <!-- Hero ─────────────────────────────────────────── -->
+      <div class="hero">
+        <canvas id="heroCanvas" aria-hidden="true"></canvas>
+        <div class="hero-inner">
+          <p class="eyebrow">East India Company · Early Modern England · c. 1600–1800</p>
+          <h1 class="hero-title">Committee of Lawsuit<br /><em>Research &amp; Analysis</em></h1>
+          <p class="hero-desc">A comprehensive synthesis of 164 Committee of Lawsuit records — reconstructing timelines, mapping professional networks, and uncovering the legal, economic, and political forces that shaped the EIC's early governance.</p>
+          <div class="hero-ctas">
+            <button class="btn btn-primary" data-goto="visualizations">Browse Visualizations</button>
+            <button class="btn btn-ghost" data-goto="description">Read the Project →</button>
+          </div>
+        </div>
+        <div class="hero-dot-hint" id="heroDotHint">
+          <span class="dot-hint-pulse"></span>
+          <span class="dot-hint-text">Click the city dots to explore trading posts</span>
+        </div>
+        <div class="hero-scroll-cue" id="heroScrollCue">
+          <span class="scroll-cue-text">Scroll to explore</span>
+          <span class="scroll-cue-bar"></span>
+        </div>
+      </div>
+
+      <!-- Home reveal (scrolls over sticky hero) ──────── -->
+      <div class="home-reveal">
+      <div class="stats-bar">
+        <div class="container stats-inner">
+          <div class="stat-item">
+            <span class="stat-n">164</span>
+            <span class="stat-l">Committee Notes</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-n">4</span>
+            <span class="stat-l">Research Questions</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-n">8</span>
+            <span class="stat-l">Visualizations</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-n">c. 1600–1800</span>
+            <span class="stat-l">Period Under Study</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Browse by Theme strip ────────────────────────── -->
+      <div class="section browse-section">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Explore</p>
+              <h2 class="section-title">Browse by Theme</h2>
+            </div>
+            <button class="btn btn-ghost btn-sm" data-goto="visualizations">View all →</button>
+          </div>
+
+          <div class="theme-scroll-wrap">
+            <button class="scroll-arrow-btn scroll-left" data-target="themeScroll">&#8592;</button>
+            <div class="theme-scroll-track" id="themeScroll">
+
+              <div class="theme-doc-card" data-goto="visualizations">
+                <div class="theme-doc-img theme-img--timeline">
+                  <span class="theme-doc-icon">TL</span>
+                </div>
+                <div class="theme-doc-info">
+                  <span class="theme-doc-cat">Timeline</span>
+                  <h4>Committee Activity Over Time</h4>
+                  <p>Chronological distribution of the 164 records</p>
+                </div>
+              </div>
+
+              <div class="theme-doc-card" data-goto="visualizations">
+                <div class="theme-doc-img theme-img--language">
+                  <span class="theme-doc-icon">LG</span>
+                </div>
+                <div class="theme-doc-info">
+                  <span class="theme-doc-cat">Language</span>
+                  <h4>Word Frequency Analysis</h4>
+                  <p>Dominant vocabulary and legal terminology</p>
+                </div>
+              </div>
+
+              <div class="theme-doc-card" data-goto="visualizations">
+                <div class="theme-doc-img theme-img--network">
+                  <span class="theme-doc-icon">NW</span>
+                </div>
+                <div class="theme-doc-info">
+                  <span class="theme-doc-cat">Networks</span>
+                  <h4>Actor Network Graph</h4>
+                  <p>Professional and social relationships</p>
+                </div>
+              </div>
+
+              <div class="theme-doc-card" data-goto="visualizations">
+                <div class="theme-doc-img theme-img--legal">
+                  <span class="theme-doc-icon">LT</span>
+                </div>
+                <div class="theme-doc-info">
+                  <span class="theme-doc-cat">Legal Themes</span>
+                  <h4>Dispute Type Breakdown</h4>
+                  <p>Classification of 164 legal disputes</p>
+                </div>
+              </div>
+
+              <div class="theme-doc-card" data-goto="visualizations">
+                <div class="theme-doc-img theme-img--legal">
+                  <span class="theme-doc-icon">SZ</span>
+                </div>
+                <div class="theme-doc-info">
+                  <span class="theme-doc-cat">Legal Themes</span>
+                  <h4>Ship Seizure Cases</h4>
+                  <p>Geographic and procedural patterns</p>
+                </div>
+              </div>
+
+              <div class="theme-doc-card" data-goto="visualizations">
+                <div class="theme-doc-img theme-img--language">
+                  <span class="theme-doc-icon">TM</span>
+                </div>
+                <div class="theme-doc-info">
+                  <span class="theme-doc-cat">Language</span>
+                  <h4>Topic Model Output</h4>
+                  <p>Latent themes across the corpus</p>
+                </div>
+              </div>
+
+            </div>
+            <button class="scroll-arrow-btn scroll-right" data-target="themeScroll">&#8594;</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Deliverables + Articles ──────────────────────── -->
+      <div class="section alt-section">
+        <div class="container two-col-layout">
+
+          <div class="col-main">
+            <p class="eyebrow">Project Outputs</p>
+            <h2 class="section-title">Deliverables</h2>
+            <div class="deliverables-stack">
+
+              <div class="deliverable-item">
+                <div class="del-num">01</div>
+                <div class="del-body">
+                  <h4>Comprehensive Analytical Report</h4>
+                  <p>Synthesis of 164 notes — timelines, annotated events, word-frequency analysis, thematic breakdowns.</p>
+                </div>
+                <span class="del-status">In Progress</span>
+              </div>
+
+              <div class="deliverable-item">
+                <div class="del-num">02</div>
+                <div class="del-body">
+                  <h4>Curated Google Drive Repository</h4>
+                  <p>Organised archive of primary source transcriptions, datasets, and supplementary materials.</p>
+                </div>
+                <span class="del-status">In Progress</span>
+              </div>
+
+              <div class="deliverable-item">
+                <div class="del-num">03</div>
+                <div class="del-body">
+                  <h4>ML Starter Code Package</h4>
+                  <p>Python code for text preprocessing, word frequency, topic modelling, and network graphs.</p>
+                </div>
+                <span class="del-status del-planned">Planned</span>
+              </div>
+
+              <div class="deliverable-item">
+                <div class="del-num">04</div>
+                <div class="del-body">
+                  <h4>Interactive Website &amp; Dashboard</h4>
+                  <p>This research platform — charts, annotated records, and analysis for academic and public audiences.</p>
+                </div>
+                <span class="del-status del-active">Active</span>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="col-side">
+            <p class="eyebrow">Key Themes</p>
+            <h2 class="section-title">Topics</h2>
+            <div class="topic-list">
+              <a class="topic-item" href="#" data-goto="visualizations">
+                <div><strong>Ship Seizures</strong><p>Patterns of seizure, recovery, and litigation</p></div>
+                <span class="topic-arrow">→</span>
+              </a>
+              <a class="topic-item" href="#" data-goto="questions">
+                <div><strong>Dispute Resolution</strong><p>Committee procedures and outcomes</p></div>
+                <span class="topic-arrow">→</span>
+              </a>
+              <a class="topic-item" href="#" data-goto="questions">
+                <div><strong>Corporate Governance</strong><p>Internal vs external legal authority</p></div>
+                <span class="topic-arrow">→</span>
+              </a>
+              <a class="topic-item" href="#" data-goto="visualizations">
+                <div><strong>Merchant Networks</strong><p>Social ties and professional alliances</p></div>
+                <span class="topic-arrow">→</span>
+              </a>
+              <a class="topic-item" href="#" data-goto="description">
+                <div><strong>Contract Enforcement</strong><p>Debt recovery and cargo claims</p></div>
+                <span class="topic-arrow">→</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      </div><!-- /home-reveal -->
+    </section><!-- /home -->
+
+
+    <!-- ════════════════════════════════════════════════════
+         PROJECT DESCRIPTION TAB
+    ═══════════════════════════════════════════════════════ -->
+    <section class="tab-panel" id="tab-description">
+
+      <div class="page-banner">
+        <div class="container">
+          <p class="eyebrow">About the Project</p>
+          <h1 class="page-title">Project Description</h1>
+          <p class="page-sub">A multi-method investigation into the legal infrastructure of the East India Company.</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="container article-layout">
+
+          <aside class="article-toc">
+            <p class="toc-label">Contents</p>
+            <ul>
+              <li><a href="#bg">Background</a></li>
+              <li><a href="#corpus">The Corpus</a></li>
+              <li><a href="#method">Methodology</a></li>
+              <li><a href="#applications">Applications</a></li>
+              <li><a href="#themes">Key Themes</a></li>
+            </ul>
+          </aside>
+
+          <article class="article-body">
+
+            <div class="article-block" id="bg">
+              <h2>Background</h2>
+              <p>The East India Company (EIC), chartered in 1600, was one of the most consequential commercial and political organisations in world history. At the intersection of trade, empire, and law, its internal governance mechanisms — including committees responsible for managing disputes and lawsuits — offer a uniquely detailed window into how early modern corporations exercised power.</p>
+              <p>This project focuses on the <strong>Committee of Lawsuit</strong>, a standing body within the EIC responsible for overseeing legal disputes, contract enforcement, cargo claims, and matters of corporate liability. Its minute books and session notes form the primary corpus for this research.</p>
+            </div>
+
+            <div class="article-block" id="corpus">
+              <h2>The Corpus: 164 Committee Notes</h2>
+              <p>The core dataset consists of <strong>164 individual meeting records</strong> produced by the Committee of Lawsuit. Each note documents:</p>
+              <ul class="article-list">
+                <li>Parties involved in legal proceedings (merchants, captains, company officers, third-party claimants)</li>
+                <li>Nature of disputes (ship seizures, debt recovery, cargo damage, contractual violations)</li>
+                <li>Procedural actions taken (referrals, delays, settlements, external court involvement)</li>
+                <li>Names, roles, and recurring actors across cases</li>
+                <li>Temporal markers enabling timeline reconstruction</li>
+              </ul>
+              <div class="article-callout">
+                <span>ℹ</span>
+                <p>These records are being systematically transcribed, cleaned, and coded to enable both qualitative close reading and quantitative computational analysis.</p>
+              </div>
+            </div>
+
+            <div class="article-block" id="method">
+              <h2>Methodology</h2>
+              <p>This project employs a mixed-methods approach combining traditional historical analysis with digital humanities and computational techniques:</p>
+              <div class="method-grid">
+                <div class="method-card"><h4>Close Reading</h4><p>Each of the 164 records is annotated and coded for key entities, legal categories, and outcomes.</p></div>
+                <div class="method-card"><h4>Timeline Reconstruction</h4><p>Temporal data reconstructs the chronological arc of disputes and institutional activity.</p></div>
+                <div class="method-card"><h4>Word Frequency &amp; NLP</h4><p>Computational text analysis surfaces dominant terminology and thematic clusters.</p></div>
+                <div class="method-card"><h4>Network Analysis</h4><p>Graph analysis maps relationships between named actors, revealing clusters of influence.</p></div>
+              </div>
+            </div>
+
+            <div class="article-block" id="applications">
+              <h2>Applications &amp; Use Cases</h2>
+              <p>Analytical findings serve multiple scholarly and practical purposes:</p>
+              <ul class="article-list">
+                <li><strong>Legal history:</strong> Tracing the development of commercial dispute resolution in early modern England</li>
+                <li><strong>Economic history:</strong> Understanding how the EIC managed financial risk through legal mechanisms</li>
+                <li><strong>Corporate governance:</strong> Examining precedents for internal institutional oversight</li>
+                <li><strong>Social history:</strong> Mapping the human networks that operated within and around the Company</li>
+                <li><strong>Digital humanities:</strong> Demonstrating the application of ML and NLP to early modern archival material</li>
+              </ul>
+            </div>
+
+            <div class="article-block" id="themes">
+              <h2>Key Themes</h2>
+              <div class="theme-cloud">
+                <span>Ship Seizures</span><span>Dispute Resolution</span><span>Corporate Governance</span>
+                <span>Early Modern Law</span><span>Merchant Networks</span><span>Cargo Claims</span>
+                <span>Contract Enforcement</span><span>Institutional Power</span><span>Colonial Trade</span>
+                <span>Debt Recovery</span><span>Committee Procedure</span><span>EIC Officers</span>
+              </div>
+            </div>
+
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════════════════════
+         RESEARCH QUESTIONS TAB
+    ═══════════════════════════════════════════════════════ -->
+    <section class="tab-panel" id="tab-questions">
+
+      <div class="page-banner page-banner--crimson">
+        <div class="container">
+          <p class="eyebrow">Inquiry Framework</p>
+          <h1 class="page-title">Research Questions</h1>
+          <p class="page-sub">The four core investigative threads guiding this project.</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="container">
+          <div class="rq-list">
+
+            <div class="rq-row">
+              <div class="rq-num-col">
+                <span class="rq-num">01</span>
+                <span class="rq-domain">Legal History</span>
+              </div>
+              <div class="rq-body">
+                <h3>How did the EIC's Committee of Lawsuit function as a legal institution within the broader English legal system of the early modern period?</h3>
+                <p>The records show the Committee operating as a quasi-autonomous legal body — initiating, deferring, and settling disputes internally before escalating to state courts. The <button class="viz-quicklink" data-viz-open="0">annual case-type breakdown</button> reveals a dramatic 1704 spike where internal Company Committee actions dominate, suggesting the EIC was absorbing an exceptional volume of disputes without external referral. The <button class="viz-quicklink" data-viz-open="2">Company vs. State authority chart</button> further maps how the boundary between internal and external jurisdiction shifted across the two-decade study window.</p>
+                <div class="rq-pills">
+                  <span>Close Reading</span><span>Timeline Analysis</span><span>Comparative Legal History</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="rq-row">
+              <div class="rq-num-col">
+                <span class="rq-num">02</span>
+                <span class="rq-domain">Social Networks</span>
+              </div>
+              <div class="rq-body">
+                <h3>What professional and social networks are embedded within the lawsuit records, and how did these networks shape the outcomes of disputes?</h3>
+                <p>Named-entity extraction across the 164 records surfaces a tight cluster of recurring legal practitioners. The <button class="viz-quicklink" data-viz-open="4">top lawyers chart</button> shows that Mr Hungerford, Mr Rowe, Mr Coulson, Mr Dubois, and Mr Dodd all peak together around 1704 — suggesting coordinated legal strategy rather than coincidental caseload overlap. The forthcoming <button class="viz-quicklink" data-viz-open="6">actor network graph</button> will map broader co-appearance patterns and identify whether these practitioners formed a cohesive faction within the Committee's proceedings.</p>
+                <div class="rq-pills">
+                  <span>Network Graph Analysis</span><span>Entity Extraction</span><span>Prosopography</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="rq-row">
+              <div class="rq-num-col">
+                <span class="rq-num">03</span>
+                <span class="rq-domain">Governance</span>
+              </div>
+              <div class="rq-body">
+                <h3>Where did corporate governance end and the external legal system begin — and how stable was that boundary over time?</h3>
+                <p>The <button class="viz-quicklink" data-viz-open="1">state-court shift area chart</button> makes the boundary instability visible: the relative share of Company Committee vs. State Court actions fluctuates substantially, with a large "Unclear" band persisting throughout — records where jurisdictional attribution cannot be determined. After the 1704 peak, the <button class="viz-quicklink" data-viz-open="2">grouped authority chart</button> shows a measurable drift toward State Court involvement, suggesting the external legal system was progressively encroaching on the EIC's internal jurisdiction.</p>
+                <div class="rq-pills">
+                  <span>Case Classification</span><span>Institutional Analysis</span><span>Longitudinal Comparison</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="rq-row">
+              <div class="rq-num-col">
+                <span class="rq-num">04</span>
+                <span class="rq-domain">Legal Themes</span>
+              </div>
+              <div class="rq-body">
+                <h3>What legal themes — particularly ship seizures and dispute processes — recur most frequently, and what do their patterns reveal about the Company's priorities?</h3>
+                <p>The <button class="viz-quicklink" data-viz-open="3">most common case types chart</button> confirms that Committee Governance (220 mentions) and Maritime Seizures &amp; Ship Litigation (134 mentions) dominate the corpus — ship-related disputes were among the most pressing legal concerns of the period. The pending <button class="viz-quicklink" data-viz-open="5">word frequency analysis</button> and <button class="viz-quicklink" data-viz-open="7">topic model output</button> will further reveal whether these themes cluster around specific actors, dates, or ports, shedding light on the Company's evolving legal exposure across its trading network.</p>
+                <div class="rq-pills">
+                  <span>NLP / Word Frequency</span><span>Topic Modelling</span><span>Thematic Coding</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="rq-synthesis">
+            <h3>Connecting Thread</h3>
+            <p>While each question operates on a distinct analytical register, they are unified by a shared concern: understanding how a <em>for-profit corporation operating under royal charter</em> developed, exercised, and legitimised legal power in an era before modern regulatory frameworks existed. The answers have implications not only for early modern history, but for contemporary debates about corporate accountability and institutional self-governance.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════════════════════
+         VISUALIZATIONS TAB
+    ═══════════════════════════════════════════════════════ -->
+    <section class="tab-panel" id="tab-visualizations">
+
+      <div class="page-banner page-banner--teal">
+        <div class="container">
+          <p class="eyebrow">Data &amp; Visual Analysis</p>
+          <h1 class="page-title">Visualizations</h1>
+          <p class="page-sub">Scroll through charts, network diagrams, and maps — populated as analysis progresses.</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="container">
+
+          <!-- Filter bar -->
+          <div class="filter-row">
+            <div class="filter-bar">
+              <button class="filter-btn active" data-filter="all">All</button>
+              <button class="filter-btn" data-filter="timeline">Timeline</button>
+              <button class="filter-btn" data-filter="language">Language</button>
+              <button class="filter-btn" data-filter="network">Networks</button>
+              <button class="filter-btn" data-filter="legal">Legal Themes</button>
+            </div>
+            <span class="viz-count" id="vizCount">8 visualizations</span>
+          </div>
+
+          <!-- ── JSTOR-style horizontal scroll carousel (populated by script.js) ── -->
+          <div class="viz-carousel-wrap">
+            <button class="scroll-arrow-btn scroll-left" data-target="vizCarousel">&#8592;</button>
+            <div class="viz-carousel" id="vizCarousel">
+              <!-- cards injected by script.js from VIZ_DATA -->
+            </div>
+            <button class="scroll-arrow-btn scroll-right" data-target="vizCarousel">&#8594;</button>
+          </div>
+
+          <!-- ── Expanded viewer panel ─────────────────── -->
+          <div class="viz-viewer" id="vizViewer">
+            <div class="viz-viewer-inner">
+              <div class="viz-viewer-display" id="vizDisplay">
+                <div class="viz-viewer-placeholder">
+                  <span id="viewerIcon">📅</span>
+                  <span id="viewerTitle">Committee Activity Over Time</span>
+                  <span id="viewerStatus">Awaiting data input — upload or embed your chart here</span>
+                </div>
+              </div>
+              <div class="viz-viewer-info" id="vizInfo">
+                <span class="viz-cat-tag" id="viewerTag">Timeline</span>
+                <h3 id="viewerHeading">Committee Activity Over Time</h3>
+                <p id="viewerDesc">A longitudinal view of the Committee's session frequency, showing periods of heightened legal activity and their correlation with known historical events (trade disputes, wars, charter renewals).</p>
+                <div class="viewer-meta-row">
+                  <span class="viewer-meta-label">Methods used</span>
+                  <div id="viewerMethods" class="viewer-methods"></div>
+                </div>
+                <div class="viewer-nav">
+                  <button class="viewer-nav-btn" id="viewerPrev">← Previous</button>
+                  <span id="viewerCounter">1 / 8</span>
+                  <button class="viewer-nav-btn" id="viewerNext">Next →</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ══════════════════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════════════════ -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-left">
+        <span class="brand-crest">§</span>
+        <div>
+          <span class="footer-brand-name">EIC Lawsuit Records</span>
+          <span class="footer-brand-sub">Committee Research Project</span>
+        </div>
+      </div>
+      <p class="footer-note">Research platform · Wireframe version · Content to be populated</p>
+    </div>
+  </footer>
+
+  <!-- ══ VIZ HOVER POPUP ═══════════════════════════════ -->
+  <div id="vizPopup" class="viz-popup" role="tooltip" aria-hidden="true">
+    <div class="viz-popup-img-wrap">
+      <img id="vizPopupImg" class="viz-popup-img" src="" alt="" />
+      <div class="viz-popup-placeholder" id="vizPopupPlaceholder">
+        <span id="vizPopupMonogram"></span>
+      </div>
+    </div>
+    <div class="viz-popup-body">
+      <span class="viz-popup-tag" id="vizPopupTag"></span>
+      <p class="viz-popup-title" id="vizPopupTitle"></p>
+      <p class="viz-popup-hint">Click to open in viewer</p>
+    </div>
+  </div>
+
+  <!-- ══ FULLSCREEN LIGHTBOX ══════════════════════════ -->
+  <div id="vizLightbox" class="viz-lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="lightbox-backdrop" id="lightboxBackdrop"></div>
+    <div class="lightbox-frame">
+      <button class="lightbox-close" id="lightboxClose" aria-label="Close fullscreen view">&#x2715;</button>
+      <img class="lightbox-img" id="lightboxImg" src="" alt="" />
+      <p class="lightbox-caption" id="lightboxCaption"></p>
+    </div>
+  </div>
+
+  <!-- ══ READING PROGRESS BAR ══════════════════════════ -->
+  <div id="rqProgressBar" class="rq-progress-bar" aria-hidden="true"></div>
+
+  <!-- ══ CITY INFO PANEL ════════════════════════════════ -->
+  <aside id="cityPanel" class="city-panel" aria-hidden="true">
+    <div class="city-panel-header">
+      <span class="city-panel-eyebrow">EIC Trading Post</span>
+      <button class="city-panel-close" id="cityPanelClose" aria-label="Close panel">&#x2715;</button>
+    </div>
+    <h3 class="city-panel-name" id="cityPanelName">—</h3>
+    <div class="city-panel-img-wrap" id="cityPanelImgWrap">
+      <img class="city-panel-img" id="cityPanelImg" src="" alt="" />
+      <p class="city-panel-img-caption" id="cityPanelImgCaption"></p>
+    </div>
+    <dl class="city-panel-body">
+      <dt>Founded</dt><dd id="cityPanelFounded">—</dd>
+      <dt>Role</dt><dd id="cityPanelRole">—</dd>
+      <dt>Record mentions</dt><dd id="cityPanelRecords">—</dd>
+    </dl>
+    <p class="city-panel-pause">Arc animation paused</p>
+  </aside>
+
+  <script src="script.js?v=7"></script>
+  <script src="three-scene.js?v=9"></script>
+</body>
+</html>
