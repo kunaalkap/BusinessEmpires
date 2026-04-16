@@ -64,6 +64,18 @@ const VIZ_DATA = [
     desc:     'Line chart tracking the annual mention frequency of the five most prominent legal practitioners in the records — Mr Hungerford, Mr Rowe, Mr Coulson, Mr Dubois, and Mr Dodd — from 1700 to 1721. The synchronised peak around 1704 suggests a coordinated legal response to the Company\'s most active dispute period.',
     methods:  ['Named Entity Recognition', 'Network Analysis', 'Prosopography'],
   },
+  {
+    image:    'assets/chart-legal-issue-categories.png',
+    cardIcon: 'LG',
+    title:    'Legal Issue Categories in EIC Records (1700–1721)',
+    shortTitle: 'Legal Issue Categories',
+    category: 'timeline',
+    tag:      'Timeline',
+    tagClass: 'cat--timeline',
+    thumbClass:'thumb--timeline',
+    desc:     'Multi-line chart tracking six legal issue categories — Committee Governance, Court Proceedings, Financial & Commercial Matters, Legal Counsel Work, Maritime Seizures & Ship Litigation, and Powers, Wills & Authority — across the full corpus (1700–1721). The sharp 1704 spike in Committee Governance reflects a surge in internal governance disputes, while a secondary rise in Court Proceedings in 1711 signals a shift toward external legal forums.',
+    methods:  ['Categorical Coding', 'Corpus Analysis', 'Time-Series Visualisation'],
+  },
 ];
 
 /* ══════════════════════════════════════════════════════
